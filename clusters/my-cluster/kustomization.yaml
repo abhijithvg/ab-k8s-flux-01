@@ -1,0 +1,14 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: my-cluster
+  namespace: flux-system
+spec:
+  interval: 1m                # Sync interval, e.g., every 1 minutes
+  path: "./clusters/my-cluster" # Path to watch in the repo
+  prune: true                   # Clean up resources that are removed from this path
+  sourceRef:
+    kind: GitRepository
+    name: ab-k8s-flux-01 # Name of the GitRepository resource created by `flux bootstrap`
+    namespace: flux-system
+
